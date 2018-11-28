@@ -1,3 +1,37 @@
+//Section 5 Lecture 61: Function Constructors
+
+var john = {
+  name: "John",
+  yearOfBirth: 1982,
+  job: "Plumber"
+};
+
+//Function Constructor...constructors are capitalized like the P in Person
+var Person = function(name, yearOfBirth, job) {
+  this.name = name;
+  this.yearOfBirth = yearOfBirth;
+  this.job = job;
+  
+};
+
+//The protoype property enables us to use inheritance. Here we give all the instances
+//access to this method Even tho the Person object doesnt
+//have the calAge function in it, the new instances all have access to it because of
+//inheritance from the prototype property
+Person.prototype.calAge = function() {
+  console.log( 2018 - this.yearOfBirth + ' years is ' + this.name + '\'s age');
+};
+
+//You can also add properties to the prototype property.
+Person.prototype.lastName = 'Smith';
+
+var john = new Person("John", 1982, "Plumber");
+var billy = new Person("Billy", 1988, "Teacher");
+var susie = new Person("Susie", 1991, "Receptionist");
+john.calAge();
+billy.calAge();
+susie.calAge();
+
 //Section 5 Lecture 67
 //IIFE
 
@@ -80,27 +114,27 @@ var joe = {
   job: "Pilot",
   presentation: function(style, timeOfDay) {
     if (style === "formal") {
-    //   console.log(
-    //     "Good " +
-    //       timeOfDay +
-    //       " ladies and gentlemen! My name is " +
-    //       this.name +
-    //       " I'm a " +
-    //       this.job +
-    //       " and I'm " +
-    //       this.age +
-    //       " years old."
-    //   );
+      //   console.log(
+      //     "Good " +
+      //       timeOfDay +
+      //       " ladies and gentlemen! My name is " +
+      //       this.name +
+      //       " I'm a " +
+      //       this.job +
+      //       " and I'm " +
+      //       this.age +
+      //       " years old."
+      //   );
     } else if (style === "friendly") {
-    //   console.log(
-    //     "Hey what's up guys?! This is " +
-    //       this.name +
-    //       ". I'm a bit tired because I've been at work all day. I'm an " +
-    //       this.job +
-    //       " and I love it! Have a great " +
-    //       timeOfDay +
-    //       "!"
-    //   );
+      //   console.log(
+      //     "Hey what's up guys?! This is " +
+      //       this.name +
+      //       ". I'm a bit tired because I've been at work all day. I'm an " +
+      //       this.job +
+      //       " and I love it! Have a great " +
+      //       timeOfDay +
+      //       "!"
+      //   );
     }
   }
 };
@@ -112,53 +146,51 @@ var michelle = {
 };
 
 var steve = {
-    name: "Steve",
-    age: 45,
-    job: "Mechanic"
-}
+  name: "Steve",
+  age: 45,
+  job: "Mechanic"
+};
 
 joe.presentation("formal", "afternoon");
 //Method borrowing...we use the presentation from the joe object and set the this var
 // from the var michelle in the first argument, then friendly, and night
 joe.presentation.call(michelle, "friendly", "night");
-joe.presentation.call(steve, 'friendly', 'night');
+joe.presentation.call(steve, "friendly", "night");
 
 //You can also use apply. Which takes in an array. It wont work for our example
 // but would look like this
 // joe.presentation.apply(michelle, ['formal', 'afternoon']);
 
-//bind method RETURNS A FUNCTION. It doesnt immediately call the function like call 
-//does. Instead it generates a copy of the function so we can store it. So we will 
-//store the copy of the function inside a function so we can access it. This is 
+//bind method RETURNS A FUNCTION. It doesnt immediately call the function like call
+//does. Instead it generates a copy of the function so we can store it. So we will
+//store the copy of the function inside a function so we can access it. This is
 // called Currying.
 
-var joeFriendly = joe.presentation.bind(joe, 'friendly');
-var michelleFormal = joe.presentation.bind(michelle, 'formal');
-joeFriendly('afternoon');
-michelleFormal('evening');
+var joeFriendly = joe.presentation.bind(joe, "friendly");
+var michelleFormal = joe.presentation.bind(michelle, "formal");
+joeFriendly("afternoon");
+michelleFormal("evening");
 
 var years = [1988, 1990, 1984, 2007, 2013, 2001, 1978];
 
-function arrayCalc(arr, func){
-    var legalAgeArray = [];
-    for(var i = 0; i < arr.length; i++){
-        legalAgeArray.push(func(arr[i]));
-    }
-    return legalAgeArray
+function arrayCalc(arr, func) {
+  var legalAgeArray = [];
+  for (var i = 0; i < arr.length; i++) {
+    legalAgeArray.push(func(arr[i]));
+  }
+  return legalAgeArray;
 }
 
-function calculateAge(el){
-    return 2018 - el
-};
+function calculateAge(el) {
+  return 2018 - el;
+}
 
-function isLegalAge(limit, el){
-    return el >= limit
-};
+function isLegalAge(limit, el) {
+  return el >= limit;
+}
 
 var ages = arrayCalc(years, calculateAge);
 var legalAgeJapan = arrayCalc(ages, isLegalAge.bind(this, 20));
 
 // console.log(ages)
 // console.log(legalAgeJapan)
-
-
