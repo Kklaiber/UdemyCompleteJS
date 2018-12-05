@@ -109,32 +109,32 @@ change(age, obj);
 
 var years = [1991, 1999, 2001, 1984, 1979, 1951, 1944];
 
-function arrayCal(arr, fn){
-    var arrayRes = [];
-    for(var i = 0; i < arr.length; i++){
-        arrayRes.push(fn(arr[i]))
-    }
-    return arrayRes;
+function arrayCal(arr, fn) {
+  var arrayRes = [];
+  for (var i = 0; i < arr.length; i++) {
+    arrayRes.push(fn(arr[i]));
+  }
+  return arrayRes;
 }
 
-function calculateA(el){
-    return 2018 - el;
+function calculateA(el) {
+  return 2018 - el;
 }
 
-function isFullAge(el){
-   return el >= 18
+function isFullAge(el) {
+  return el >= 18;
 }
 
-function oldEnoughToRetire(el){
-    return el >= 65;
+function oldEnoughToRetire(el) {
+  return el >= 65;
 }
 
-function maxHeartRate(el){
-    if(el >= 18 && el <= 81){
-        return Math.round(206.9 - (0.67 * el))
-    }else{
-        return -1;
-    }
+function maxHeartRate(el) {
+  if (el >= 18 && el <= 81) {
+    return Math.round(206.9 - 0.67 * el);
+  } else {
+    return -1;
+  }
 }
 var ages = arrayCal(years, calculateA);
 var retirementAge = arrayCal(ages, oldEnoughToRetire);
@@ -145,7 +145,56 @@ var fullAges = arrayCal(years, isFullAge);
 // console.log(fullAges);
 // console.log(ages);
 
+//Lecture 66 FUNCTIONS RETURNING FUNCTIONS
 
+function interviewQuestion(job) {
+  if (job === "designer") {
+    return function(name) {
+      // console.log(name + ", what is your favorite part of design?");
+    };
+  } else if (job === "developer") {
+    return function(name) {
+      // console.log(name + ", what is your favorite framework?");
+    };
+  } else {
+    return function(name) {
+      // console.log(name + ", are you currently working?");
+    };
+  }
+}
+
+var designerQuestion = interviewQuestion("designer");
+designerQuestion("Roger");
+
+var developerQuestion = interviewQuestion("developer");
+developerQuestion("Bill");
+
+
+
+function favoriteSport(sport){
+  if(sport === 'baseball'){
+    return function(favTeam){
+      // console.log('My favorite sport is ' + sport + 
+      // ' and my favorite team is the ' + favTeam + '!');
+    }
+  }else if(sport === 'basketball'){
+    return function(favTeam){
+    //   console.log('My favorite sport is ' + sport + 
+    // ' and my favorite team is the ' + favTeam + '!')
+    }
+  }else if (sport === 'Football'){
+    return function(favTeam){
+    //   console.log(sport + ' is my favorite sport and the ' + 
+    // favTeam + ' are the best team in the NFL!')
+    }
+  }else{
+    console.log('Do you like sports?')
+  }
+}
+
+var football = favoriteSport('Football')('Browns');
+var basketball = favoriteSport('basketball')('Cavs');
+var baseball = favoriteSport('baseball')('Indians');
 
 //Section 5 Lecture 67
 //IIFE
@@ -161,45 +210,62 @@ game();
 //not reusable code. So if i would place the console log score outside of
 //this function it would come back undefined
 
-(function() {
+(function(goodluck) {
   var score = Math.random() * 10;
-  // console.log(score >= 5)
-})();
+  console.log(score >= 5 - goodluck)
+})(2);
 
 // console.log(score);
 
 //Section 5 Lecture 68
 //Closures
 //The scope chain is the variables that the function has access to.
+//Closures are a function with preserved data, so it can be accessed over and over.
+// They are built into JavaScript. It is called a closure because the current execution 
+// context CLOSES IN on the outer variable object, so that it can use it. 
 
-function retirement(retirementAge) {
-  var yearsRemaining = " years left until retirement.";
-  return function(yearOfBirth) {
-    var age = 2018 - yearOfBirth;
-    // console.log(retirementAge - age + yearsRemaining);
-  };
+
+function retirement(retirementAge){
+  var yearsLeft = ' years left until retirement';
+  return function(yob){
+    var age = 2018 - yob;
+    console.log((retirementAge - age) + yearsLeft)
+  }
 }
 
-var retirementUSA = retirement(65);
-var retirementJapan = retirement(70);
-var retirementMexico = retirement(75);
+var usaRetirement = retirement(65)(1984)
 
-//I can access all of these from the inner function bc of closures.
-retirementUSA(1984);
-retirementJapan(1982);
-retirementMexico(1990);
 
-function interviewQuestion(job) {
-  return function(name) {
-    if (job === "designer") {
-      //   console.log(name + ", what do you like most obout UX design?");
-    } else if (job === "optician") {
-      //   console.log(name + ", what is your favorite kind of glasses?");
-    } else {
-      //   console.log("Hi " + name + ", what do you do for work?");
-    }
-  };
-}
+
+
+// function retirement(retirementAge) {
+//   var yearsRemaining = " years left until retirement.";
+//   return function(yearOfBirth) {
+//     var age = 2018 - yearOfBirth;
+//     // console.log(retirementAge - age + yearsRemaining);
+//   };
+// }
+
+// var retirementUSA = retirement(65);
+// var retirementJapan = retirement(70);
+// var retirementMexico = retirement(75);
+
+// //I can access all of these from the inner function bc of closures.
+// retirementUSA(1984);
+// retirementJapan(1982);
+// retirementMexico(1990);
+
+// function interviewQuestion(job) {
+//   return function(name) {
+//     if (job === "designer") {
+//       //   console.log(name + ", what do you like most obout UX design?");
+//     } else if (job === "optician") {
+//       //   console.log(name + ", what is your favorite kind of glasses?");
+//     } else {
+//       //   console.log("Hi " + name + ", what do you do for work?");
+//     }
+//   };
+// }
 
 interviewQuestion("designer")("Kyle");
 interviewQuestion("optician")("Michelle");
