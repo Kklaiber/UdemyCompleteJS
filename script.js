@@ -137,7 +137,7 @@ function maxHeartRate(el) {
   }
 }
 var ages = arrayCal(years, calculateA);
-var retirementAge = arrayCal(ages, oldEnoughToRetire);
+// var retirementAge = arrayCal(ages, oldEnoughToRetire);
 // console.log(retirementAge);
 var rates = arrayCal(ages, maxHeartRate);
 // console.log(rates);
@@ -169,32 +169,30 @@ designerQuestion("Roger");
 var developerQuestion = interviewQuestion("developer");
 developerQuestion("Bill");
 
-
-
-function favoriteSport(sport){
-  if(sport === 'baseball'){
-    return function(favTeam){
-      // console.log('My favorite sport is ' + sport + 
+function favoriteSport(sport) {
+  if (sport === "baseball") {
+    return function(favTeam) {
+      // console.log('My favorite sport is ' + sport +
       // ' and my favorite team is the ' + favTeam + '!');
-    }
-  }else if(sport === 'basketball'){
-    return function(favTeam){
-    //   console.log('My favorite sport is ' + sport + 
-    // ' and my favorite team is the ' + favTeam + '!')
-    }
-  }else if (sport === 'Football'){
-    return function(favTeam){
-    //   console.log(sport + ' is my favorite sport and the ' + 
-    // favTeam + ' are the best team in the NFL!')
-    }
-  }else{
-    console.log('Do you like sports?')
+    };
+  } else if (sport === "basketball") {
+    return function(favTeam) {
+      //   console.log('My favorite sport is ' + sport +
+      // ' and my favorite team is the ' + favTeam + '!')
+    };
+  } else if (sport === "Football") {
+    return function(favTeam) {
+      //   console.log(sport + ' is my favorite sport and the ' +
+      // favTeam + ' are the best team in the NFL!')
+    };
+  } else {
+    console.log("Do you like sports?");
   }
 }
 
-var football = favoriteSport('Football')('Browns');
-var basketball = favoriteSport('basketball')('Cavs');
-var baseball = favoriteSport('baseball')('Indians');
+var football = favoriteSport("Football")("Browns");
+var basketball = favoriteSport("basketball")("Cavs");
+var baseball = favoriteSport("baseball")("Indians");
 
 //Section 5 Lecture 67
 //IIFE
@@ -212,7 +210,7 @@ game();
 
 (function(goodluck) {
   var score = Math.random() * 10;
-  console.log(score >= 5 - goodluck)
+  // console.log(score >= 5 - goodluck)
 })(2);
 
 // console.log(score);
@@ -221,22 +219,74 @@ game();
 //Closures
 //The scope chain is the variables that the function has access to.
 //Closures are a function with preserved data, so it can be accessed over and over.
-// They are built into JavaScript. It is called a closure because the current execution 
-// context CLOSES IN on the outer variable object, so that it can use it. 
+// They are built into JavaScript. It is called a closure because the current execution
+// context CLOSES IN on the outer variable object, so that it can use it.
 
+function retirement(retirementAge) {
+  var string = " years left until retirement. Woohoo!";
+  return function(yearOfBirth) {
+    var age = 2019 - yearOfBirth;
+  };
+}
 
-function retirement(retirementAge){
-  var yearsLeft = ' years left until retirement';
-  return function(yob){
-    var age = 2018 - yob;
-    console.log((retirementAge - age) + yearsLeft)
+var kyleRetirement = retirement(65);
+kyleRetirement(1984);
+
+var michelleRetirement = retirement(65);
+michelleRetirement(1991);
+
+function interviewQuestion(job) {
+  if (job === "designer") {
+    return function(name) {
+      // console.log(name + ", what is your favorite part of design?");
+    };
+  } else if (job === "developer") {
+    return function(name) {
+      // console.log(name + ", what is your favorite framework?");
+    };
+  } else {
+    return function(name) {
+      // console.log(name + ", are you currently working?");
+    };
   }
 }
 
-var usaRetirement = retirement(65)(1984)
+function interviewQuestion(job) {
+  return function(name) {
+    if (job === "designer") {
+      // console.log(name + ", what is your favorite part of design?");
+    } else if (job === "developer") {
+      // console.log(name + ", what is your favorite framework?");
+    } else {
+      // console.log(name + ", are you currently working?");
+    }
+  };
+}
 
+interviewQuestion("designer")("Herb");
+interviewQuestion("developer")("Bernie");
 
+// function interviewQuestion(job){
+//   return function(name){
+//     console.log(name + ', what is your favorite thing about being a ' + job + "?")
+//   }
+// }
 
+// var designer = interviewQuestion("designer");
+// designer("kyle");
+
+// var teacher = interviewQuestion('teacher');
+// teacher('George');
+
+// function retirement(retirementAge){
+//   var yearsLeft = ' years left until retirement';
+//   return function(yob){
+//     var age = 2018 - yob;
+//     console.log((retirementAge - age) + yearsLeft)
+//   }
+// }
+
+// var usaRetirement = retirement(65)(1984)
 
 // function retirement(retirementAge) {
 //   var yearsRemaining = " years left until retirement.";
