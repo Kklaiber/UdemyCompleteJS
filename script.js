@@ -425,3 +425,111 @@ var legalAgeJapan = arrayCalc(ages, isLegalAge.bind(this, 20));
 
 // console.log(ages)
 // console.log(legalAgeJapan)
+
+//Coding Challenge 7...lecture 71
+
+(function() {
+  var Question = function(question, answers, correct) {
+    this.question = question;
+    this.answers = answers;
+    this.correct = correct;
+  };
+
+  Question.prototype.displayQuestion = function() {
+    console.log(this.question);
+
+    for (var i = 0; i < this.answers.length; i++) {
+      console.log(i + ":" + this.answers[i]);
+    }
+  };
+
+  // Question.prototype.displayAnswer = function(){
+  //   console.log("The correct answer is : " + this.correct);
+
+   
+  //   }
+  
+
+  Question.prototype.checkAnswer = function(ans, callback) {
+    var sc;
+    if (ans === this.correct) {
+      console.log("That's correct! Great Job!");
+      sc = callback(true);
+    } else {
+      console.log("Sorry, the correct answer is: " + this.correct);
+      sc = callback(false);
+    }
+    this.displayScore(sc);
+  };
+
+  Question.prototype.displayScore = function(score) {
+    console.log("Your current score is : " + score);
+    console.log("*------------------------------------------*");
+  };
+
+  var q1 = new Question(
+    "What is the tastiest food on this list?",
+    ["Salad", "Tacos", "Carrots"],
+    1
+  );
+
+  var q2 = new Question(
+    "Who is the best team in the NFL?",
+    [
+      "Cleveland Browns",
+      "Pittsburgh Steelers",
+      "Detroit Lions",
+      "Green Bay Packers"
+    ],
+    0
+  );
+
+  var q3 = new Question(
+    "What is the capital of California?",
+    ["Los Angeles", "Sacramento", "San Francisco", "San Jose"],
+    1
+  );
+
+  var q4 = new Question(
+    "What is the best programming language?",
+    ["Java", "JavaScript", "Ruby", "Python"],
+    1
+  );
+
+  var q5 = new Question(
+    "True or False...JavaScript is the best programming language?",
+    ["True", "False"],
+    0
+  );
+
+  var questions = [q1, q2, q3, q4, q5];
+
+  function score() {
+    var sc = 0;
+    return function(correct) {
+      if (correct) {
+        sc++;
+      }
+      return sc;
+    };
+  }
+
+  var totalScore = score();
+
+  function nextQuestion() {
+    var q = Math.floor(Math.random() * questions.length);
+    questions[q].displayQuestion();
+    // questions[q].displayAnswer();
+
+    var answer = prompt("Please select the correct answer.");
+
+    if (answer !== "exit") {
+      questions[q].checkAnswer(parseInt(answer), totalScore);
+
+      nextQuestion();
+    }
+  }
+  nextQuestion();
+})();
+
+
