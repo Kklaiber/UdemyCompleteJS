@@ -97,6 +97,23 @@ var UIController = (function() {
       document.querySelector(element).insertAdjacentHTML('beforeend', newHtml);
     },
 
+    clearFields: function(){
+        var fields, fieldsArr;
+
+        fields = document.querySelectorAll(DOMstrings.inputDescription + 
+            ', ' + DOMstrings.inputValue);
+        
+        //takes the data returned to fields and turns it from a table to an array
+        //now we can loop over the array and clear the fields
+        fieldsArr = Array.prototype.slice.call(fields);
+
+        fieldsArr.forEach(function(current, index, array){
+            current.value = "";
+        })
+
+        fieldsArr[0].focus();
+    },
+
     getDOMstrings: function() {
       return DOMstrings;
     }
@@ -110,6 +127,7 @@ var controller = (function(budgetCtrl, UICtrl) {
 
     document.querySelector(DOM.inputBtn).addEventListener("click", ctrlAddItem);
 
+    //Set up keypress so when hitting enter button will return data
     document.addEventListener("keypress", function(event) {
       if (event.keyCode === 13 || event.which === 13) {
         ctrlAddItem();
@@ -119,8 +137,8 @@ var controller = (function(budgetCtrl, UICtrl) {
 
   var ctrlAddItem = function() {
     // 1. Get field input data
-    var input = UIController.getInput();
-    console.log(input);
+    var input = UICtrl.getInput();
+    // console.log(input);
     // 2. Add item to budget controller
     var newItem = budgetCtrl.addItem(
       input.type,
@@ -128,9 +146,11 @@ var controller = (function(budgetCtrl, UICtrl) {
       input.value
     );
     // 3. Add item to UI
-    UIController.addListItem(newItem, input.type);
-    // 4. Calculate budget
-    // 5. Display budget on UI
+    UICtrl.addListItem(newItem, input.type);
+    // 4. Clear the input fields
+    UICtrl.clearFields();
+    //5. Calculate budget
+    // 6. Display budget on UI
   };
 
   return {
