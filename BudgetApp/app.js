@@ -11,6 +11,14 @@ var budgetController = (function() {
     this.value = value;
   };
 
+  var calculateTotal = function(type){
+    var sum = 0;
+    data.allItems[type].forEach(function(cur){
+      sum += cur.value
+    })
+    data.totals[type] = sum;
+  }
+
   var data = {
     allItems: {
       exp: [],
@@ -19,8 +27,12 @@ var budgetController = (function() {
     totals: {
       exp: 0,
       inc: 0
-    }
+    },
+    budget: 0,
+    percentage: -1
   };
+
+
 
   return {
     addItem: function(type, des, val) {
@@ -46,6 +58,30 @@ var budgetController = (function() {
       data.allItems[type].push(newItem);
       //Return the element
       return newItem;
+    },
+
+    calculateBudget: function(){
+        //1. Calculate total income and expenses
+        calculateTotal('exp');
+        calculateTotal('inc');
+        //2. Calculate the budget: which is income - expenses
+        data.budget = data.totals.inc - data.totals.exp;
+        //3. Calculate the % of income spent
+        if(data.totals.inc > 0){
+          data.percentage = Math.round((data.totals.exp / data.totals.inc) * 100)
+        } else {
+          data.percentage = -1;
+        }
+    },
+
+    getBudget: function(){
+        return {
+          budget: data.budget,
+          totalInc: data.totals.inc,
+          totalExp: data.totals.exp,
+          percentage: data.percentage
+
+        }
     },
 
     test: function() {
@@ -137,17 +173,26 @@ var controller = (function(budgetCtrl, UICtrl) {
 
   var updateBudget = function(){
     //1. Calculate budget
-
+    budgetCtrl.calculateBudget();
     //2. Return the budget
+    var budget = budgetCtrl.getBudget();
 
     // 3. Display budget on UI
+    console.log(budget);
   };
 
   var ctrlAddItem = function() {
     // 1. Get field input data
     var input = UICtrl.getInput();
 
-    if(input.description !== "" && !isNaN(input.value) && input.value > 0){
+    //Test for input values
+    if(input.description === ""){
+        alert("Sorry! Item must have a description.")
+    } else if(isNaN(input.value)){
+        alert("Item must have a numerical value entered.")
+    } else if(input.value === 0){
+        alert("Value must be greater than zero.")
+    } else if (input.description !== "" && !isNaN(input.value) && input.value > 0){
         // console.log(input);
         // 2. Add item to budget controller
         var newItem = budgetCtrl.addItem(
