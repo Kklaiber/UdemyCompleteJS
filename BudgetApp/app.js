@@ -84,11 +84,11 @@ var budgetController = (function() {
         }
     },
 
-    deleteItem: function(obj){
-      data.allItems[type].forEach(function(cur){
-        delete(cur);
-      })
-    },
+    // deleteItem: function(obj){
+    //   data.allItems[type].forEach(function(cur){
+    //     delete(cur);
+    //   })
+    // },
 
     test: function() {
       console.log(data);
