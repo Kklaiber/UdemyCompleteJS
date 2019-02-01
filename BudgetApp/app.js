@@ -197,17 +197,17 @@ var UIController = (function() {
           element = DOMstrings.incomeContainer;
 
         html =
-          '<div class="item clearfix" id="inc-%id%"><div class="item__description">%description%</div><div class="right clearfix"><div class="item__value">%value%</div><div class="item__delete"><button class="item__delete--btn"><i class="ion-ios-close-outline"></i></button></div></div></div>';
+          '<div class="item clearfix" id="inc-%id%"><div class="item__description">&description%</div><div class="right clearfix"><div class="item__value">%value%</div><div class="item__delete"><button class="item__delete--btn"><i class="ion-ios-close-outline"></i></button></div></div></div>';
       } else if(type === "exp"){
           element = DOMstrings.expensesContainer;
 
         html =
-        '<div class="item clearfix" id="exp-%id%"><div class="item__description">%description%</div><div class="right clearfix"><div class="item__value">%value%</div><div class="item__percentage">21%</div><div class="item__delete"><button class="item__delete--btn"><i class="ion-ios-close-outline"></i></button></div></div></div>';
+        '<div class="item clearfix" id="exp-%id%"><div class="item__description">&description%</div><div class="right clearfix"><div class="item__value">%value%</div><div class="item__percentage">21%</div><div class="item__delete"><button class="item__delete--btn"><i class="ion-ios-close-outline"></i></button></div></div></div>';
     }
 
       //replace placeholder text with actual data, from the newItem object
         newHtml = html.replace('%id%', obj.id);
-        newHtml = newHtml.replace('%description%', obj.description);
+        newHtml = newHtml.replace('&description%', obj.description);
         newHtml = newHtml.replace('%value%', formatNumber(obj.value, type));
 
       //Insert the HTML into the DOM
