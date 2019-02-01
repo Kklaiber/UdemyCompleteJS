@@ -58,3 +58,32 @@ for(var i = 0; i < 5; i++){
     console.log(i);
 }
 
+
+
+
+
+
+
+
+//Lecture 105 BLOCKS AND IIFE's
+
+//ES5 IIFE
+
+(function(){
+    var c = 3;
+})()
+
+// console.log(c);
+
+//A block is the ES6 version of an IIFE. to make a block just use {} bracket
+//and write your code inside
+
+{
+    const a = 1;
+    let b = 2;
+    var c = 3;
+
+}
+
+console.log(a + b);
+console.log(c); //var is not block scoped so it is accesible outside the scope
