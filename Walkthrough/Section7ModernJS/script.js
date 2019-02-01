@@ -83,30 +83,68 @@ function calcAge(year) {
 }
 
 //ES5
-console.log(
-  "This is " +
-    firstName +
-    " " +
-    lastName +
-    ". He was born in " +
-    yob +
-    ". Today he is " +
-    calcAge(yob) +
-    " years old."
-);
+// console.log(
+//   "This is " +
+//     firstName +
+//     " " +
+//     lastName +
+//     ". He was born in " +
+//     yob +
+//     ". Today he is " +
+//     calcAge(yob) +
+//     " years old."
+// );
 
 //ES6
-console.log(
-  `This is ${firstName} ${lastName}. He was born in ${yob}. Today he is ${calcAge(
-    yob
-  )} years old.`
-);
+// console.log(
+//   `This is ${firstName} ${lastName}. He was born in ${yob}. Today he is ${calcAge(
+//     yob
+//   )} years old.`
+// );
 
 const n = `${firstName} ${lastName}`;
 
-console.log(n.startsWith("K"));
-console.log(n.endsWith("er"));
-console.log(n.includes("lai"));
-console.log(firstName.repeat(7));
+// console.log(n.startsWith("K"));
+// console.log(n.endsWith("er"));
+// console.log(n.includes("lai"));
+// console.log(firstName.repeat(7));
+
 //how to add space in repeat
-console.log(`${firstName} `.repeat(7));
+// console.log(`${firstName} `.repeat(7));
+
+
+
+
+
+
+
+//LECTURE 107 ARROW FUNCTIONS
+
+const years = [1990, 1945, 1998, 1977];
+
+//ES5
+
+var ages5 = years.map(function(el){
+    return 2019 - el
+});
+
+// console.log(ages5)
+
+//ES6
+let ages6 = years.map(el => 2019 - el);
+// console.log(ages6)
+
+
+ages6 = years.map((el,index) => 
+`Ages Element ${index + 1}: ${2019 - el}`);
+
+// console.log(ages6)
+
+ages6 = years.map((el, index, arr) => {
+    const currentYear = new Date().getFullYear();
+    const age = currentYear - el;
+
+    return `Ages Element ${index + 1}: ${age} ${arr}`;
+
+})
+// console.log(ages6)
