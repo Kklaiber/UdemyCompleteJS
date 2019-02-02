@@ -112,20 +112,14 @@ const n = `${firstName} ${lastName}`;
 //how to add space in repeat
 // console.log(`${firstName} `.repeat(7));
 
-
-
-
-
-
-
 //LECTURE 107 ARROW FUNCTIONS
 
 const years = [1990, 1945, 1998, 1977];
 
 //ES5
 
-var ages5 = years.map(function(el){
-    return 2019 - el
+var ages5 = years.map(function(el) {
+  return 2019 - el;
 });
 
 // console.log(ages5)
@@ -134,110 +128,128 @@ var ages5 = years.map(function(el){
 let ages6 = years.map(el => 2019 - el);
 // console.log(ages6)
 
-
-ages6 = years.map((el,index) => 
-`Ages Element ${index + 1}: ${2019 - el}`);
+ages6 = years.map((el, index) => `Ages Element ${index + 1}: ${2019 - el}`);
 
 // console.log(ages6)
 
 ages6 = years.map((el, index, arr) => {
-    const currentYear = new Date().getFullYear();
-    const age = currentYear - el;
+  const currentYear = new Date().getFullYear();
+  const age = currentYear - el;
 
-    return `Ages Element ${index + 1}: ${age} ${arr}`;
-
-})
+  return `Ages Element ${index + 1}: ${age} ${arr}`;
+});
 // console.log(ages6)
-
-
 
 //LECTURE 108 ARROW FUNCTIONS Lexical THIS keyword
 
 //ES5
 
 var box5 = {
-    color: 'green',
-    position: 1,
-    clickMe: function(){
-
-        var self = this;
-        document.querySelector('.green').addEventListener('click',function(){
-            var str = 'This is box number ' + self.position + ' and it is ' + self.color;
-            alert(str);
-        })
-    }
-}
+  color: "green",
+  position: 1,
+  clickMe: function() {
+    var self = this;
+    document.querySelector(".green").addEventListener("click", function() {
+      var str =
+        "This is box number " + self.position + " and it is " + self.color;
+      alert(str);
+    });
+  }
+};
 
 box5.clickMe();
-
 
 //ES6
 
 const box6 = {
-    color: 'green',
-    position: 1,
-    clickMe: function(){
-
-        document.querySelector('.green').addEventListener('click',() => {
-            var str = 'This is box number ' + this.position + ' and it is ' + this.color;
-            alert(str);
-        })
-    }
-}
+  color: "green",
+  position: 1,
+  clickMe: function() {
+    document.querySelector(".green").addEventListener("click", () => {
+      var str =
+        "This is box number " + this.position + " and it is " + this.color;
+      alert(str);
+    });
+  }
+};
 
 // box6.clickMe();
 
-
-
-
 const box66 = {
-    color: 'green',
-    position: 1,
-    clickMe: function(){
-
-        document.querySelector('.green').addEventListener('click',() => {
-            var str = 'This is box number ' + this.position + ' and it is ' + this.color;
-            alert(str);
-        })
-    }
-}
+  color: "green",
+  position: 1,
+  clickMe: function() {
+    document.querySelector(".green").addEventListener("click", () => {
+      var str =
+        "This is box number " + this.position + " and it is " + this.color;
+      alert(str);
+    });
+  }
+};
 
 box66.clickMe();
 
-
-function Person(name){
-    this.name = name;
+function Person(name) {
+  this.name = name;
 }
 
-Person.prototype.myFriends5 = function(friends){
-    var arr = friends.map(function(el)
-    {
-        return this.name + " is friends with " + el
-    }.bind(this))
+Person.prototype.myFriends5 = function(friends) {
+  var arr = friends.map(
+    function(el) {
+      return this.name + " is friends with " + el;
+    }.bind(this)
+  );
 
-    console.log(arr)
-}
+  // console.log(arr)
+};
 
 friends = ["bob", "henry", "frank"];
 
-new Person('Kyle').myFriends5(friends);
-
+new Person("Kyle").myFriends5(friends);
 
 //ES6
 
-function Person(name){
-    this.name = name;
+function Person(name) {
+  this.name = name;
 }
 
-Person.prototype.myFriends6 = function(friends){
-    var arr = friends.map(el => 
-    
-         `${this.name} is friends with ${el}`
-    );
+Person.prototype.myFriends6 = function(friends) {
+  var arr = friends.map(el => `${this.name} is friends with ${el}`);
 
-    console.log(arr)
-}
+  // console.log(arr)
+};
 
 friends = ["bob", "henry", "frank"];
 
-new Person('Jerry').myFriends6(friends);
+new Person("Jerry").myFriends6(friends);
+
+//LECTURE 109: DESTRUCTURING
+
+//ES5
+var john = ["john", 26];
+var name = john[0];
+var age = john[1];
+
+//ES6
+const [title, yobs] = ["Manager", 1999];
+// console.log(title);
+// console.log(yobs);
+
+const obj = {
+  fstName: "Riley",
+  lstName: "Klaiber"
+};
+
+const { fstName, lstName } = obj;
+// console.log(fstName);
+// console.log(lstName);
+
+function calcAgeRetirement(year) {
+  const age = new Date().getFullYear() - year;
+  return [age, 65 - age];
+}
+
+const [age2, yearTilRetirement] = calcAgeRetirement(1984);
+
+// console.log(age2);
+// console.log(yearTilRetirement);
