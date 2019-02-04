@@ -356,3 +356,59 @@ var fullAge = ages.map(function(cur){
 
 // console.log(ages.findIndex(cur => cur >= 18));
 // console.log(ages.find(cur => cur >= 18))
+
+
+
+
+
+
+
+//LECTURE 111: SPREAD OPERATOR
+
+function addFourAges(a, b, c, d){
+    return a + b + c + d;
+}
+
+var tot1 = addFourAges(10, 33, 23, 44);
+// console.log(tot1)
+
+//ES5
+var ages = [10, 33, 23,44];
+
+var tot2 = addFourAges.apply(null, ages);
+// console.log(tot2);
+
+//ES6 
+let tot3 = addFourAges(...ages);
+// console.log(tot3)
+
+
+
+var afcTeams = ['Browns', 'Steelers', 'Ravens', 'Bengals'];
+var nfcTeams = ['Chargers', 'Rams', 'Raiders', 'Seahawks'];
+
+var playoffs = [...afcTeams, ...nfcTeams, 'Patriots'];
+
+// console.log(playoffs);
+
+
+const h = document.querySelector('h1');
+const bx = document.querySelectorAll('.box');
+
+const all = [h, ...bx];
+Array.from(all).forEach(cur => cur.style.textTransform = 'uppercase');
+Array.from(bx).forEach(cur => cur.style.color = 'white');
+h.style.color = 'gray'
+
+
+
+function records(wins, loss, tie){
+    var perc = Math.round(wins / (wins + loss) * 100).toFixed(2) ;
+    // console.log(`The Browns record is W-${wins} L-${loss} T-${tie} Percent- ${perc}%`);
+
+    return perc;
+
+}
+
+const browns = records(5,11,1 )
+
