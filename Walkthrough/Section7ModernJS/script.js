@@ -398,13 +398,42 @@ isFullAge5(5, 1990, 1988, 2011, 2000);
 
 //ES6
 function isFullAge6(limit, ...yrs) {
-  yrs.forEach(cur => console.log(2019 - cur >= limit));
+//   yrs.forEach(cur => console.log(2019 - cur >= limit));
 }
 
 isFullAge6(21, 1990, 2011, 2002, 1989);
 
 function emotions(joy, ...mood) {
-  mood.forEach(cur => console.log(cur === joy));
+//   mood.forEach(cur => console.log(cur === joy));
 }
 
 emotions("happy", "mad", "happy", "sad", "glad", "happy");
+
+//LECTURE 113 DEFAULT PARAMETERS
+
+//ES5
+// function HotSauce(name, peppers, from, soldBy){
+
+//     from === undefined ? from = "USA" : from = from;
+//     soldBy === undefined ? soldBy = 'Steamin\' Freddies' : soldby = soldBy;
+
+//     this.name = name;
+//     this.peppers = peppers;
+//     this.from = from;
+//     this.soldBy = soldBy;
+// }
+
+// var flaminDarts = new HotSauce('Flamin\' Darts', 'Habenero, Ghost Peppers, Chilis')
+
+
+//ES6
+
+function HotSauce(name, peppers, from = 'USA', soldBy = 'Frankie\'s Sowse'){
+
+        this.name = name;
+        this.peppers = peppers;
+        this.from = from;
+        this.soldBy = soldBy;
+    }
+    
+     var flaminDarts = new HotSauce('Flamin\' Darts', 'Habenero, Ghost Peppers, Chilis')
