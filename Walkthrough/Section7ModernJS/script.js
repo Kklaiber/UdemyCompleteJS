@@ -436,4 +436,152 @@ function HotSauce(name, peppers, from = 'USA', soldBy = 'Frankie\'s Sowse'){
         this.soldBy = soldBy;
     }
     
-     var flaminDarts = new HotSauce('Flamin\' Darts', 'Habenero, Ghost Peppers, Chilis')
+     var flaminDarts = new HotSauce('Flamin\' Darts', 'Habenero, Ghost Peppers, Chilis');
+
+
+
+//LECTURE 114 MAPS
+
+//How to create a new Map in ES6
+const question = new Map();
+question.set('question', 'What is the official name of the latest version of JavaScript');
+question.set(1, 'ES5')
+question.set(2, 'ES2011')
+question.set(3, 'ES2015')
+question.set(4, 'ES7')
+question.set('correct', 3);
+question.set(true, 'Correct Answer!')
+question.set(false, 'Wrong answer, try again.')
+
+//How to retreive the data from a map
+// console.log(question.get('question'));
+//get size of map
+// console.log(question.size);
+
+// question.delete(4);
+//clears all map sets
+// question.clear();
+
+// question.forEach((val, key) => console.log(`This is ${key} and set to ${val}`) );
+
+for(let [key, val] of question.entries()) {
+
+    if(typeof(key) === 'number') {
+        // console.log(`${key}: ${val}`);
+    }
+}
+
+// const ans = parseInt(prompt("Write the correct answer"));
+// console.log(question.get(ans === question.get('correct')))
+
+
+const food = new Map();
+
+food.set('strawberry', 'fruit')
+food.set('kiwi', 'fruit');
+food.set('corn', 'veg');
+food.set('zucchini', 'veg');
+food.set(1, 'serving');
+food.set(2, 'diet')
+
+
+for(let [key, name] of food.entries()){
+    
+    if(typeof(key) === 'string' ) {
+        // console.log(`${key} is a ${name}`)
+    }
+    
+}
+
+
+
+const trivia = new Map();
+trivia.set('ques', 'What is the largest state in area in USA?');
+trivia.set(1, 'Texas');
+trivia.set(2, 'California');
+trivia.set(3, 'Alaska');
+trivia.set(4, 'Rhode Island');
+trivia.set('correct', 3);
+trivia.set(true, 'That\'s correct!!! :D');
+trivia.set(false, 'Sorry, try again!');
+
+// console.log(trivia.get('ques'));
+
+for(let [key, val] of trivia){
+    if(typeof(key) === 'number') {
+        // console.log(`${key}: ${val}`);
+    }
+}
+
+// const ques = parseInt(prompt('Enter number of correct answer.'));
+
+// console.log(trivia.get(ques === trivia.get('correct')))
+
+const trivia1 = new Map();
+trivia1.set('ques', 'What is the largest species of salmon?');
+trivia1.set(1, 'Pink');
+trivia1.set(2, 'Red');
+trivia1.set(3, 'Silver');
+trivia1.set(4, 'King');
+trivia1.set('correct', 4);
+trivia1.set(true, 'That\'s correct!!! :D');
+trivia1.set(false, 'Sorry, try again!');
+
+// console.log(trivia1.get('ques'));
+
+for(let [key, val] of trivia1){
+    if(typeof(key) === 'number') {
+        // console.log(`${key}: ${val}`);
+    }
+}
+
+// const ques1 = parseInt(prompt('Enter number of correct answer.'));
+
+// console.log(trivia1.get(ques1 === trivia1.get('correct')));
+
+
+
+//LECTURE 115 CLASSES
+//classes dont add any functionality but make it easier to use inheritance
+
+//ES5 didnt have classes but function constructors.
+var Person5 = function(name, yob, job) {
+    this.name = name;
+    this.yob = yob;
+    this.job = job;
+}
+
+Person5.prototype.calculateAge = function() {
+    new Date().getFullYear - this.yob;
+    // console.log(new Date().getFullYear - this.yob)
+}
+
+var gary = new Person5('gary', 1988, 'construction')
+
+//OR can make function declaration
+// function Person5(name, yob, job) {
+//     this.name = name;
+//     this.yob = yob;
+//     this.job = job;
+// }
+
+
+
+//ES6
+class Person6 {
+    constructor (name, yob, job) {
+        this.name = name;
+        this.yob = yob;
+        this.job = job;
+    }
+
+    calculateAge() {
+        const age = new Date().getFullYear - this.year
+        // console.log(age)
+    }
+}
+
+const gary6 = new Person6('Gary', 1988,'teacher');
+
+
+
