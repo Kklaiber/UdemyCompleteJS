@@ -584,4 +584,44 @@ class Person6 {
 const gary6 = new Person6('Gary', 1988,'teacher');
 
 
+//Lecture 116 CLASSES WITH SUBCLASSES
 
+var bmiCalc = function(name, mass, height) {
+    var bmi = mass / (height * height);
+
+    return bmi
+}
+
+JohnBmiCalc = bmiCalc('John', 78, 1.69);
+MarkBmiCalc = bmiCalc('Mark', 92, 1.95);
+const compare = JohnBmiCalc > MarkBmiCalc;
+
+
+console.log(`Is John's BMI greater than Mark's?` + compare)
+// console.log(JohnBmiCalc);
+// console.log(MarkBmiCalc);
+
+
+function calAge(yob) {
+    return new Date().getFullYear() - yob ;   
+};
+
+const kyleAge = calAge(1984);
+// console.log(kyleAge);
+
+function retirementAge(yearOfBirth, firstName) {
+    var age =  calAge(yearOfBirth);
+    var calc = 65 - age;
+
+    if (calc <= 0) {
+        console.log( `Congrats ${firstName}! You're of retirement age!`)
+    } else {
+        console.log(`${firstName}, you've got ${calc} years left until retirement`)
+    }
+
+}
+
+var jim = retirementAge(1999, 'Jim');
+var barry = retirementAge(1944, 'Barry')
+console.log(jim);
+console.log(barry)
