@@ -623,5 +623,59 @@ function retirementAge(yearOfBirth, firstName) {
 
 var jim = retirementAge(1999, 'Jim');
 var barry = retirementAge(1944, 'Barry')
-console.log(jim);
-console.log(barry)
+// console.log(jim);
+// console.log(barry)
+
+
+function favTeam(team, name) {
+    switch(team) {
+        case 'Browns':
+            return `${name}'s response: My favorite team is the ${team}.... Automated response...Smart man, ${name}! Here we go Brownies!!!`
+        case 'Steelers':
+            return `${name}'s response: My favorite team is the ${team}.... Automated response...Ah man, ${name}...I thought I smelled urine... Were you dropped as a baby?`
+        case 'Patriots':
+            return `${name}'s response: My favorite team is the ${team}.... Automated response...Jah Borrrring, ${name}!`
+        default:
+            return `${name}'s response: My favorite team is the ${team}.... Automated response...If you don\'t have a team yet, ${name} save some time and join the brownies!`
+    }
+}
+
+
+// console.log(favTeam('Browns', 'Kyle'));
+// console.log(favTeam('Steelers', 'Barry'));
+// console.log(favTeam('Patriots', 'George'));
+// console.log(favTeam('not sure', 'Bill'));
+
+
+const mark = {
+    fullName: 'Mark Shart',
+    mass: 199,
+    height: 6.4,
+    calcBMI: function(){
+        this.bmi =  this.mass / (this.height * this.height)
+    }
+}
+
+
+const john2 = {
+    fullName: 'John Shmon',
+    mass: 321,
+    height: 5.9,
+    calcBMI: function(){
+        this.bmi =  this.mass / (this.height * this.height);
+        return this.bmi
+    }
+}
+
+john2.calcBMI();
+mark.calcBMI();
+
+if (john2.bmi > mark.bmi) {
+    console.log('John has a higher BMI')
+} else if (mark.bmi > john2.bmi) {
+    console.log('Mark has a higher BMI')
+} else if (john2.bmi = mark.bmi) {
+    console.log('Mark and John have the same BMI')
+} else {
+    console.log('something went wrong...')
+}

@@ -1,0 +1,34 @@
+body {
+    background-color: rgb(109, 106, 106)
+}
+
+.title {
+    color: white;
+    font-family: Avenir Next;
+    text-decoration: underline;
+    font-size: 3em;
+    text-align: center;
+
+}
+
+.col{
+    background-color: rgb(216, 216, 216);
+    font-family: Avenir Next;
+    font-size: 1em;
+    color: rgb(0, 139, 163);
+    font-weight: bold;
+}
+.col-left{
+    float: left;
+    display: flex;
+    min-width: 49%;
+    height: 25em;
+    
+}
+
+.col-right{
+    float: right;
+    display: flex;
+    min-width: 49%;
+    height: 20em;
+}
