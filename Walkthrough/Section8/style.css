@@ -17,11 +17,13 @@ body {
     font-size: 1em;
     color: rgb(0, 139, 163);
     font-weight: bold;
+    border-radius: .8em;
+    padding: 1em
 }
 .col-left{
     float: left;
     display: flex;
-    min-width: 49%;
+    min-width: 45%;
     height: 25em;
     
 }
@@ -29,6 +31,6 @@ body {
 .col-right{
     float: right;
     display: flex;
-    min-width: 49%;
+    min-width: 45%;
     height: 20em;
 }
