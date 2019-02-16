@@ -77,20 +77,30 @@ const getRelated = publisher => {
 })
 }
 
-getIDs.then(IDs => {
+//OLD WAY
+// getIDs.then(IDs => {
+//     console.log(IDs);
+//     return getRecipe(IDs[0])
+// })
+// .then(recipe => {
+//     console.log(recipe[0]);
+//     return getRelated(recipe[1].publisher)
+// })
+// .then(recipe => {
+//     console.log(recipe)
+// })
+// .catch(err => {
+//     console.log(err)
+// })
+
+//NEW WAY ASYNC/AWAIT
+async function getRecipeAA() {
+    const IDs = await getIDs;
     console.log(IDs);
-    return getRecipe(IDs[0])
-})
-.then(recipe => {
-    console.log(recipe[0]);
-    return getRelated(recipe[1].publisher)
-})
-.then(recipe => {
-    console.log(recipe)
-})
-.catch(err => {
-    console.log(err)
-})
-
-
+    const recipe = await getRecipe(IDs[1]);
+    console.log(recipe);
+    const related = await getRelated(recipe[1].publisher);
+    console.log(related);
+}
+getRecipeAA();
 
